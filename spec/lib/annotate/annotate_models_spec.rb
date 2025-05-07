@@ -152,6 +152,20 @@ describe AnnotateModels do
         is_expected.to eq(['1.2'])
       end
     end
+
+    context 'when the argument is an object that responds to to_s' do
+      let(:value) do
+        obj = Object.new
+        def obj.to_s
+          "custom string representation"
+        end
+        obj
+      end
+
+      it 'returns the result of to_s wrapped in quotes' do
+        is_expected.to eq('"custom string representation"')
+      end
+    end
   end
 
   describe '.parse_options' do
