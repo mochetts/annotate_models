@@ -107,7 +107,7 @@ module AnnotateModels
       when BigDecimal               then value.to_s('F')
       when Array                    then value.map { |v| quote(v) }
       else
-        value.inspect
+        value.respond_to?(:to_s) ? value.to_s.inspect : value.inspect
       end
     end
 
